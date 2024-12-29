@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐历史科普</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 导航条 -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="#home">首页</a></li>
+            <li><a href="#history">音乐历史</a></li>
+            <li><a href="#genres">音乐类型</a></li>
+        </ul>
+    </nav>
+
+     <!-- 首页 -->
+     <section id="home" class="fade-in">
+        <h1>欢迎来到音乐历史科普网站</h1>
+        <p>今天的日期是：<span id="date"></span></p>
+        <hr>
+        <p>这里带你走进音乐的世界，了解音乐的起源、发展和各种类型。</p>
+    </section>
+
+    <!-- 音乐历史 -->
+    <section id="history" class="fade-in">
+        <h2>音乐的起源与发展</h2>
+        <p>音乐是一种历史悠久的艺术形式，起源于人类早期的仪式和娱乐活动。</p>
+        <p>点击下面的链接以了解更多音乐的起源：</p>
+        <a href="https://baike.baidu.com/item/%E9%9F%B3%E4%B9%90%E5%8F%B2/5593235?fromModule=search-result_lemma" class="search-link" target="_blank">音乐的起源</a>
+        <p>此外，你可以点击<a href="#genres">这里</a>查看不同的音乐类型。</p>
+    </section>
+
+    <!-- 音乐类型 -->
+    <section id="genres" class="fade-in">
+        <h2>音乐类型</h2>
+        <ul>
+            <li><a href="https://baike.baidu.com/item/%E5%8F%A4%E5%85%B8%E9%9F%B3%E4%B9%90/106197?fr=ge_ala" target="_blank">古典音乐</a></li>
+            <li><a href="https://baike.baidu.com/item/%E6%B5%81%E8%A1%8C%E9%9F%B3%E4%B9%90/21036?fr=aladdin" target="_blank">流行音乐</a></li>
+            <li><a href="https://baike.baidu.com/item/%E6%91%87%E6%BB%9A/164208?fr=ge_ala" target="_blank">摇滚音乐</a></li>
+            <li><a href="https://baike.baidu.com/item/%E7%88%B5%E5%A3%AB%E4%B9%90/109495?fr=ge_ala" target="_blank">爵士音乐</a></li>
+        </ul>
+    </section>
+
+    <!-- 著名音乐家与作品 -->
+    <section class="fade-in">
+        <h2>著名音乐家与作品</h2>
+        <table>
+            <tr>
+                <th>音乐家</th>
+                <th>代表作品</th>
+                <th>播放示例</th>
+                <th>了解更多</th>
+            </tr>
+            <tr>
+                <td>贝多芬</td>
+                <td>第九交响曲</td>
+                <td>
+                    <audio id="audioBeethoven" src="beethoven-sample.mp3"></audio>
+                    <button id="playBeethoven" onclick="playPauseAudio('audioBeethoven', 'playBeethoven')">▶️</button>
+                    <input type="range" id="progressBeethoven" value="0" max="100" style="width: 80%;" oninput="seekAudio('audioBeethoven', this)">
+                </td>
+                <td><a href="https://www.baidu.com/s?wd=贝多芬" target="_blank">百度搜索</a></td>
+            </tr>
+            <tr>
+                <td>莫扎特</td>
+                <td>魔笛</td>
+                <td>
+                    <audio id="audioMozart" src="mozart-sample.mp3"></audio>
+                    <button id="playMozart" onclick="playPauseAudio('audioMozart', 'playMozart')">▶️</button>
+                    <input type="range" id="progressMozart" value="0" max="100" style="width: 80%;" oninput="seekAudio('audioMozart', this)">
+                </td>
+                <td><a href="https://www.baidu.com/s?wd=莫扎特" target="_blank">百度搜索</a></td>
+            </tr>
+            <tr>
+                <td>巴赫</td>
+                <td>G弦上的咏叹调</td>
+                <td>
+                    <audio id="audioBach" src="bach-sample.mp3"></audio>
+                    <button id="playBach" onclick="playPauseAudio('audioBach', 'playBach')">▶️</button>
+                    <input type="range" id="progressBach" value="0" max="100" style="width: 80%;" oninput="seekAudio('audioBach', this)">
+                </td>
+                <td><a href="https://www.baidu.com/s?wd=巴赫" target="_blank">百度搜索</a></td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- 返回顶部链接 -->
+    <footer>
+        <p><a href="#home">回到顶部</a></p>
+    </footer>
+    <!-- JavaScript to handle audio control and progress bar -->
+    <script>
+        // 显示当前日期
+        document.getElementById('date').textContent = new Date().toLocaleDateString();
+
+        // 播放/暂停音频
+        function playPauseAudio(audioId, buttonId) {
+            const audio = document.getElementById(audioId);
+            const button = document.getElementById(buttonId);
+
+            if (audio.paused) {
+                audio.play();
+                button.textContent = "⏸️";  // 改为暂停图标
+            } else {
+                audio.pause();
+                button.textContent = "▶️";  // 改为播放图标
+            }
+
+            // 监听播放进度，实时更新进度条
+            audio.addEventListener('timeupdate', () => {
+                const progressBar = document.getElementById('progress' + audioId.charAt(5).toUpperCase() + audioId.slice(6));
+                progressBar.value = (audio.currentTime / audio.duration) * 100;
+            });
+        }
+
+        // 拖动进度条更新音频播放时间
+        function seekAudio(audioId, progressBar) {
+            const audio = document.getElementById(audioId);
+            audio.currentTime = (progressBar.value / 100) * audio.duration;
+        }
+    </script>
+</body>
+</html>

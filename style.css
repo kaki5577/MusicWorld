@@ -1,0 +1,197 @@
+/* 全局样式 */
+/* body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    background-image: url('background.jpg');
+    overflow-x: hidden;
+} */
+/* 设置页面背景图片和波纹效果 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;  /* 确保背景图片铺满屏幕 */
+}
+
+/* 波纹背景层 */
+.wave-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* 使背景不可交互 */
+    background-color: rgba(255, 255, 255, 0.1); /* 白色的波纹效果 */
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.3) 20%, transparent 30%);
+    animation: waveAnimation 5s infinite linear;
+    z-index: -1;  /* 确保波纹在最底层 */
+}
+
+/* 创建波纹动画 */
+@keyframes waveAnimation {
+    0% {
+        background-size: 200px 200px;
+        transform: scale(0);
+    }
+    50% {
+        background-size: 400px 400px;
+        transform: scale(1);
+    }
+    100% {
+        background-size: 600px 600px;
+        transform: scale(2);
+    }
+}
+/* 导航条样式 */
+.navbar {
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1em;
+    text-align: center;
+    z-index: 1000;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.navbar ul li a:hover {
+    color: #ff6347;
+}
+
+/* 主要内容区域 */
+h1, h2, h3 {
+    text-align: center;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 3em;
+    margin-top: 80px;
+}
+
+h2 {
+    font-size: 2.5em;
+    color: #FFD700; /* 金色 */
+}
+
+h3 {
+    font-size: 1.5em;
+    color: #ffcc00;
+}
+
+p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    max-width: 900px;
+    text-align: center;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+section {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+/* 列表样式 */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    padding: 8px;
+    margin: 5px 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+ul li a:hover {
+    color: #ff4500;
+}
+
+/* 表格样式 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    color: #fff;
+}
+
+th {
+    background-color: #333;
+}
+
+td {
+    text-align: center;
+}
+
+/* 超链接样式 */
+.search-link {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    color: #fff;
+    background-color: #ff6347;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.search-link:hover {
+    background-color: #ff4500;
+    transform: scale(1.1);
+}
+
+
+/* 动画淡入效果 */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
